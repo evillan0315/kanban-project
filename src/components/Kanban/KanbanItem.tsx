@@ -140,9 +140,17 @@ const KanbanItem = React.memo(
               {...(!handle ? listeners : undefined)}
               {...props}
               tabIndex={!handle ? 0 : undefined}
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center', // Align vertically
+              }}
             >
-              {value} {/* ✅ Ensure value is rendered */}
-              <Box>
+              <Box sx={{ flexGrow: 1, wordBreak: "break-word", overflowWrap: "break-word" }}>
+                {value}
+              </Box>
+         
+              <Box sx={{ ml: 'auto', display: 'flex', gap: 1 }}>
                 {onRemove ? (
                   <IconButton onClick={onRemove}>
                     <Delete />

@@ -108,8 +108,8 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
       setAnchorEl(null);
       setSelectedIndex(null);
     };
-    const handleCreateItem = (index: number) => {
-      console.log(`Create item in column ${index}`);
+    const handleCreateItem = (column: string) => {
+      console.log(`Create ${column}`);
     };
     return (
       <Box
@@ -143,7 +143,7 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
               <Button
                 variant="contained"
                 startIcon={<Add />}
-                onClick={() => handleCreateItem(0)}
+                onClick={() => handleCreateItem(label)}
               >
                 Add Item
               </Button>

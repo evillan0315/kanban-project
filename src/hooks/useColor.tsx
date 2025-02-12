@@ -27,7 +27,9 @@ export function useColor() {
     }
     fetchColumnColors();
   }, []);
-
+/*   const setColors = (colors: Record<string, string>) => {
+    setColumnColors(colors);
+  }; */
   const getColor = (id: string) => columnColors[id] || "#ccc"; // Default color if not found
 
   return { columnColors, getColor };

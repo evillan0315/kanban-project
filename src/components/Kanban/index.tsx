@@ -184,7 +184,7 @@ export default function Kanban({
  // itemCount,
   cancelDrop,
   columns,
-  handle = true,
+  handle = false,
   // items=initialItems,
   containerStyle,
   coordinateGetter = multipleContainersCoordinateGetter,
@@ -213,7 +213,8 @@ export default function Kanban({
 
       const tasks: Task[] = await tasksResponse.json();
       const columns: Column[] = await columnsResponse.json();
-
+      // Store column colors using setColors from useColor
+      
       return columns.reduce<Record<string, string[]>>((acc, column) => {
         // Always include the column with an empty array as a default
 
@@ -549,6 +550,7 @@ export default function Kanban({
                         renderItem={renderItem}
                         containerId={containerId}
                         getIndex={getIndex}
+                        onRemove={() => handleRemove(value)}
                       />
                     );
                   })}
@@ -598,6 +600,7 @@ export default function Kanban({
       <KanbanItem
         value={id}
         handle={handle}
+
         style={getItemStyles({
           containerId: findContainer(id) as UniqueIdentifier,
           overIndex: -1,
@@ -720,6 +723,7 @@ interface SortableItemProps {
   getIndex(id: UniqueIdentifier): number;
   renderItem(): React.ReactElement;
   wrapperStyle({ index }: { index: number }): React.CSSProperties;
+  onRemove: ()=>void;
 }
 
 function SortableItem({
@@ -748,9 +752,10 @@ function SortableItem({
   });
   const mounted = useMountStatus();
   const mountedWhileDragging = isDragging && !mounted;
-  const { columnColors, getColor } = useColor();
-  console.log(containerId, "containerId");
-  console.log(columnColors[containerId], getColor(containerId as string));
+  const { columnColors } = useColor();
+  const handleRemoveItem = ()=>{
+    console.log("Handle remove Item")
+  }
   return (
     <KanbanItem
       ref={disabled ? undefined : setNodeRef}
@@ -760,6 +765,7 @@ function SortableItem({
       handle={handle}
       handleProps={handle ? { ref: setActivatorNodeRef } : undefined}
       index={index}
+      onRemove={handleRemoveItem}
       wrapperStyle={wrapperStyle({ index })}
       style={style({
         index,
