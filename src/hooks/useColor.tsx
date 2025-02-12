@@ -20,13 +20,11 @@ export function useColor() {
           acc[column.name] = column.color;
           return acc;
         }, {});
-        console.log(colorsMap);
         setColumnColors(colorsMap);
       } catch (error) {
         console.error("Error fetching column colors:", error);
       }
     }
-
     fetchColumnColors();
   }, []);
 

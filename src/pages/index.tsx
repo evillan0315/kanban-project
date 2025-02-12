@@ -1,7 +1,7 @@
 import React  from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
-import KanbanBoard from "@/components/KanbanBoard";
+
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         justifyContent="bottom" // Center horizontally
         alignItems="stretch" // Center vertically
       >
-        <KanbanBoard />
+        
       </Grid>
     </Box>
   );
