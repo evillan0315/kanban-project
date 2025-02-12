@@ -184,7 +184,7 @@ export default function Kanban({
  // itemCount,
   cancelDrop,
   columns,
-  handle = false,
+  handle = true,
   // items=initialItems,
   containerStyle,
   coordinateGetter = multipleContainersCoordinateGetter,
@@ -196,7 +196,7 @@ export default function Kanban({
   strategy = verticalListSortingStrategy,
   trashable = false,
   vertical = false,
-  scrollable = false,
+  scrollable = true,
 }: Props) {
 
   const {columnColors} = useColor()
@@ -321,7 +321,6 @@ export default function Kanban({
       if (recentlyMovedToNewContainer.current) {
         lastOverId.current = activeId;
       }
-
       // If no droppable is matched, return the last match
       return lastOverId.current ? [{ id: lastOverId.current }] : [];
     },
@@ -339,19 +338,15 @@ export default function Kanban({
     if (id in items) {
       return id;
     }
-
     return Object.keys(items).find((key) => items[key].includes(String(id)));
   };
 
   const getIndex = (id: UniqueIdentifier) => {
     const container = findContainer(id);
-
     if (!container) {
       return -1;
     }
-
     const index = items[container].indexOf(String(id));
-
     return index;
   };
 
@@ -388,14 +383,11 @@ export default function Kanban({
         }}
         onDragOver={({ active, over }) => {
           const overId = over?.id;
-
           if (overId == null || overId === TRASH_ID || active.id in items) {
             return;
           }
-
           const overContainer = findContainer(overId);
           const activeContainer = findContainer(active.id);
-
           if (!overContainer || !activeContainer) {
             return;
           }
@@ -406,9 +398,7 @@ export default function Kanban({
               const overItems = items[overContainer];
               const overIndex = overItems.indexOf(overId);
               const activeIndex = activeItems.indexOf(active.id);
-
               let newIndex: number;
-
               if (overId in items) {
                 newIndex = overItems.length + 1;
               } else {
@@ -452,16 +442,12 @@ export default function Kanban({
               return arrayMove(containers, activeIndex, overIndex);
             });
           }
-
           const activeContainer = findContainer(active.id);
-
           if (!activeContainer) {
             setActiveId(null);
             return;
           }
-
           const overId = over?.id;
-
           if (overId == null) {
             setActiveId(null);
             return;

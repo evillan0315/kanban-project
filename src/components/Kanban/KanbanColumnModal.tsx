@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+} from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { SketchPicker } from "react-color";
@@ -20,7 +27,15 @@ interface FormData {
   [key: string]: string;
 }
 
-const DynamicFormDialog = ({ open, onClose, handleAddColumn }: { open: boolean; onClose: () => void, handleAddColumn: (data:any)=>void }) => {
+const DynamicFormDialog = ({
+  open,
+  onClose,
+  handleAddColumn,
+}: {
+  open: boolean;
+  onClose: () => void;
+  handleAddColumn: (data: any) => void;
+}) => {
   const { control, handleSubmit, reset } = useForm<FormData>();
   const [schema, setSchema] = useState<Field[]>([]);
 
@@ -33,9 +48,9 @@ const DynamicFormDialog = ({ open, onClose, handleAddColumn }: { open: boolean; 
 
   const onSubmit = async (data: FormData) => {
     try {
-        if(data.slug){
-            data.slug = data.name.toLowerCase().replace(/\s+/g, "-");
-        }
+      if (data.slug) {
+        data.slug = data.name.toLowerCase().replace(/\s+/g, "-");
+      }
       const response = await fetch("/api/column", {
         method: "POST",
         headers: {
@@ -49,7 +64,7 @@ const DynamicFormDialog = ({ open, onClose, handleAddColumn }: { open: boolean; 
       //setColumn()
       const result = await response.json();
       console.log("Form submitted successfully", result);
-      handleAddColumn(result)
+      handleAddColumn(result);
       onClose();
       reset();
     } catch (error) {
@@ -68,10 +83,13 @@ const DynamicFormDialog = ({ open, onClose, handleAddColumn }: { open: boolean; 
             control={control}
             defaultValue=""
             rules={{ required: field.required }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value }, fieldState: { error } }) =>
               field.name === "color" ? (
                 <div style={{ margin: "10px 0" }}>
-                  <SketchPicker color={value || "#000000"} onChange={(color) => onChange(color.hex)} />
+                  <SketchPicker
+                    color={value || "#000000"}
+                    onChange={(color) => onChange(color.hex)}
+                  />
                 </div>
               ) : (
                 <TextField
@@ -85,13 +103,21 @@ const DynamicFormDialog = ({ open, onClose, handleAddColumn }: { open: boolean; 
                   helperText={error ? "This field is required" : ""}
                 />
               )
-            )}
+            }
           />
         ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">Cancel</Button>
-        <Button onClick={handleSubmit(onSubmit)} color="primary" variant="contained">Submit</Button>
+        <Button onClick={onClose} color="secondary">
+          Cancel
+        </Button>
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          color="primary"
+          variant="contained"
+        >
+          Submit
+        </Button>
       </DialogActions>
     </Dialog>
   );

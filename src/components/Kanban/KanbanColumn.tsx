@@ -67,17 +67,17 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
     }: KanbanColumnsProps,
     ref
   ) => {
-    if(!hover){
+    if (!hover) {
       hover = false;
     }
-    if(!unstyled){
+    if (!unstyled) {
       unstyled = false;
     }
-    if(!placeholder){
+    if (!placeholder) {
       placeholder = false;
     }
-    
-    if(!scrollable){
+
+    if (!scrollable) {
       scrollable = false;
     }
     const [anchorEl, setAnchorEl] = useState<
@@ -120,7 +120,7 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
         minWidth="300px"
         height={"100%"}
       >
-        <Card variant="elevation" onClick={onClick} sx={{height: "100%"}}>
+        <Card variant="elevation" onClick={onClick} sx={{ height: "100%" }}>
           {label ? (
             <CardHeader
               title={
@@ -137,7 +137,7 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
             />
           ) : null}
 
-          <CardContent >{children}</CardContent>
+          <CardContent>{children}</CardContent>
           {label ? (
             <CardActions sx={{ justifyContent: "center" }}>
               <Button
