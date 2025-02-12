@@ -1,0 +1,23 @@
+[
+  {
+    "id": "5c6aabafbf",
+    "roleName": "Public",
+    "description": "Users who have not logged in and have limited access to public resources."
+  },
+  {
+    "id": "466839be0d",
+    "roleName": "Authenticated",
+    "description": "Users who have logged in and have access to standard features of the platform."
+  },
+  {
+    "id": "6ee94860fa",
+    "roleName": "Administrator",
+    "description": "Users with elevated permissions to manage platform settings, users, and content."
+  },
+  {
+    "id": "f8c302c61c",
+    "roleName": "Super",
+    "description": "Top-level administrators with unrestricted access to all system functionalities."
+  }
+]
+
