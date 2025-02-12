@@ -8,6 +8,7 @@ A modern Kanban-based project management application built with Next.js, TypeScr
 - **Drag-and-Drop Support**: Seamlessly move tasks between columns using DND-kit.
 - **Project Organization**: Categorize tasks into different projects.
 - **Database Persistence**: Store and retrieve tasks using PostgreSQL and Prisma.
+- **User Authentication**: Secure authentication with NextAuth.js, supporting Google and GitHub login.
 - **Responsive UI**: Optimized for both desktop and mobile using MUI components.
 - **Dark Mode Support**: A sleek dark mode option for better usability.
 
@@ -19,6 +20,7 @@ A modern Kanban-based project management application built with Next.js, TypeScr
 - [Prisma](https://www.prisma.io/) - ORM for database interaction.
 - [PostgreSQL](https://www.postgresql.org/) - Relational database for data storage.
 - [DND-kit](https://dndkit.com/) - Drag-and-drop library for Kanban functionality.
+- [NextAuth.js](https://next-auth.js.org/) - Authentication library supporting multiple providers.
 
 ## Installation
 
@@ -36,9 +38,15 @@ A modern Kanban-based project management application built with Next.js, TypeScr
    ```
 
 3. Set up the environment variables:
-   Create a `.env` file and configure your database connection:
+   Create a `.env` file and configure your database connection and authentication providers:
    ```env
    DATABASE_URL=postgresql://user:password@localhost:5432/kanban_db
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=your-secret-key
+   GOOGLE_CLIENT_ID=your-google-client-id
+   GOOGLE_CLIENT_SECRET=your-google-client-secret
+   GITHUB_CLIENT_ID=your-github-client-id
+   GITHUB_CLIENT_SECRET=your-github-client-secret
    ```
 
 4. Apply database migrations:
@@ -55,6 +63,7 @@ A modern Kanban-based project management application built with Next.js, TypeScr
 
 ## Usage
 
+- Sign in using Google or GitHub.
 - Create a new project and add tasks.
 - Drag and drop tasks between columns to update their status.
 - Click on a task to edit or delete it.
