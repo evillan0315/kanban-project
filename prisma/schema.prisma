@@ -8,21 +8,23 @@ datasource db {
 }
 
 model User {
-  id                    String    @id @default(uuid())
-  email                 String    @unique
+  id                    String         @id @default(uuid())
+  email                 String         @unique
   name                  String?
   password              String?
   emailVerified         DateTime?
   image                 String?
-  account_creation_date DateTime  @default(now())
+  account_creation_date DateTime       @default(now())
   phone_number          String?
   address               String?
   gender                String?
-  username              String?   @unique
+  username              String?        @unique
   Accounts              Account[]
   Comments              Comment[]
   File                  File[]
   Sessions              Session[]
+  UserPriority          UserPriority[]
+  UserStatus            UserStatus[]
 }
 
 model Role {
@@ -112,6 +114,7 @@ model Project {
   startDate   DateTime?
   id          Int           @id @default(autoincrement())
   ProjectTeam ProjectTeam[]
+  Task        Task[]
 }
 
 model ProjectTeam {
@@ -123,16 +126,49 @@ model ProjectTeam {
 }
 
 model Task {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?
-  status      String?
-  priority    String?
-  tags        String?
-  startDate   DateTime?
-  dueDate     DateTime?
-  points      Int?
-  projectId   Int?
+  id           Int            @id @default(autoincrement())
+  title        String
+  description  String?
+  status       String
+  priority     String
+  tags         String?
+  startDate    DateTime?
+  dueDate      DateTime?
+  projectId    Int
+  project      Project        @relation(fields: [projectId], references: [id])
+  TaskPriority TaskPriority[]
+  TaskStatus   TaskStatus[]
+  TaskTag      TaskTag[]
+}
+
+model TaskStatus {
+  id       String @id @default(uuid())
+  taskId   Int
+  statusId String
+  status   Status @relation(fields: [statusId], references: [id])
+  task     Task   @relation(fields: [taskId], references: [id])
+}
+
+model TaskPriority {
+  id         String   @id @default(uuid())
+  taskId     Int
+  priorityId String
+  priority   Priority @relation(fields: [priorityId], references: [id])
+  task       Task     @relation(fields: [taskId], references: [id])
+}
+
+model Tag {
+  id      String    @id @default(uuid())
+  name    String
+  TaskTag TaskTag[]
+}
+
+model TaskTag {
+  id     String @id @default(uuid())
+  taskId Int
+  tagId  String
+  tag    Tag    @relation(fields: [tagId], references: [id])
+  task   Task   @relation(fields: [taskId], references: [id])
 }
 
 model TaskAssignment {
@@ -162,4 +198,62 @@ model Column {
   name  String  @unique
   color String?
   slug  String  @unique
+}
+
+model Priority {
+  id            String          @id @default(uuid())
+  slug          String          @unique
+  name          String
+  PriorityColor PriorityColor[]
+  TaskPriority  TaskPriority[]
+  UserPriority  UserPriority[]
+}
+
+model Status {
+  id          String        @id @default(uuid())
+  slug        String        @unique
+  name        String
+  StatusColor StatusColor[]
+  TaskStatus  TaskStatus[]
+  UserStatus  UserStatus[]
+}
+
+model Color {
+  id            String          @id @default(uuid())
+  slug          String          @unique
+  name          String
+  PriorityColor PriorityColor[]
+  StatusColor   StatusColor[]
+}
+
+model StatusColor {
+  id       String @id @default(uuid())
+  statusId String
+  colorId  String
+  color    Color  @relation(fields: [colorId], references: [id])
+  status   Status @relation(fields: [statusId], references: [id])
+}
+
+model PriorityColor {
+  id         String   @id @default(uuid())
+  priorityId String
+  colorId    String
+  color      Color    @relation(fields: [colorId], references: [id])
+  priority   Priority @relation(fields: [priorityId], references: [id])
+}
+
+model UserPriority {
+  id         String   @id @default(uuid())
+  userId     String
+  priorityId String
+  priority   Priority @relation(fields: [priorityId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model UserStatus {
+  id       String @id @default(uuid())
+  userId   String
+  statusId String
+  status   Status @relation(fields: [statusId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
 }
