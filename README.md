@@ -1,139 +1,69 @@
-# 🚀 Dynamic Prisma Schema Manager
+# Kanban Project Management
 
-<img src="./dynamic-prisma-schema-manager.png">
+A modern Kanban-based project management application built with Next.js, TypeScript, and MUI. This app enables teams to organize and track tasks efficiently using a drag-and-drop interface powered by DND-kit.
 
-An intuitive **Next.js, TypeScript, and MUI**-powered tool for dynamically managing **Prisma schemas** via a **GUI and interactive terminal**. Effortlessly create, modify, and manage database models—all from a user-friendly interface.
+## Features
 
-## ⚡ Features
+- **Task Management**: Create, update, and delete tasks within different Kanban columns.
+- **Drag-and-Drop Support**: Seamlessly move tasks between columns using DND-kit.
+- **Project Organization**: Categorize tasks into different projects.
+- **Database Persistence**: Store and retrieve tasks using PostgreSQL and Prisma.
+- **Responsive UI**: Optimized for both desktop and mobile using MUI components.
+- **Dark Mode Support**: A sleek dark mode option for better usability.
 
-✅ **Dynamic Schema Editor** – Add, update, and remove Prisma models & fields via a sleek UI  
-✅ **Interactive Terminal** – Run Prisma commands (`migrate`, `db push`, `generate`) directly in-app  
-✅ **Live Log Streaming** – View Prisma execution logs in real-time using Server-Sent Events (SSE)  
-✅ **Yup Validation** – Ensures correct input for fields and schema definition  
-✅ **MUI-Powered UI** – Clean, modern UI built with Material-UI  
-✅ **TypeScript Support** – Strong type safety across the app  
-✅ **Prisma & PostgreSQL** – Fully integrated with Prisma ORM and PostgreSQL  
+## Technologies Used
 
-## 🎥 Demo
+- [Next.js](https://nextjs.org/) - React framework for server-side rendering and static site generation.
+- [TypeScript](https://www.typescriptlang.org/) - Strongly typed JavaScript for enhanced development.
+- [MUI](https://mui.com/) - Modern UI components for a polished design.
+- [Prisma](https://www.prisma.io/) - ORM for database interaction.
+- [PostgreSQL](https://www.postgresql.org/) - Relational database for data storage.
+- [DND-kit](https://dndkit.com/) - Drag-and-drop library for Kanban functionality.
 
-🚧 **Live demo coming soon!** 🚧
+## Installation
 
-## 🛠️ Tech Stack
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/evillan0315/kanban-project.git
+   cd kanban-project
+   ```
 
-| Technology    | Description                           |
-|--------------|-------------------------------------|
-| **Next.js**  | React framework for SSR & API routes |
-| **TypeScript** | Static type-checking for better development |
-| **Prisma**   | Modern ORM for PostgreSQL management |
-| **MUI**      | Material UI for a beautiful interface |
-| **SSE**      | Real-time log streaming for terminal |
-| **React Hook Form** | Form handling with validation |
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
 
-## 🚀 Getting Started
+3. Set up the environment variables:
+   Create a `.env` file and configure your database connection:
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost:5432/kanban_db
+   ```
 
-### 📦 **Installation**
+4. Apply database migrations:
+   ```sh
+   npx prisma migrate dev --name init
+   ```
 
-Clone the repository:
+5. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-```sh
-git clone https://github.com/your-username/dynamic-prisma-schema-manager.git
-cd dynamic-prisma-schema-manager
-```
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Install dependencies:
+## Usage
 
-```sh
-npm install
-# or
-yarn install
-```
+- Create a new project and add tasks.
+- Drag and drop tasks between columns to update their status.
+- Click on a task to edit or delete it.
 
-### 🔧 **Setup Environment Variables**
+## Contributing
 
-Create a `.env` file and configure your database:
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-```ini
-DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
-```
+## License
 
-### 🏗️ **Run the App**
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Run the development server:
-
-```sh
-npm run dev
-```
-
-The app will be available at **`http://localhost:3000`**.
-
-## 📂 Folder Structure
-
-```
-📦 dynamic-prisma-schema-manager
-├── 📁 pages              # Next.js API Routes & Pages
-│   ├── 📁 api
-│   │   ├── createModel.ts # API for handling schema updates
-│   ├── index.tsx        # Main UI page
-├── 📁 components         # UI Components (Drawer, Form, Terminal)
-├── 📁 hooks             # Custom React Hooks (e.g., useLoading)
-├── 📁 prisma            # Prisma schema directory
-│   ├── schema.prisma    # Prisma schema definition
-├── 📁 public            # Static assets
-├── 📁 styles            # Global styles
-├── .env.example        # Example environment variables
-├── README.md           # Project documentation
-└── tsconfig.json       # TypeScript configuration
-```
-
-## ✨ Usage
-
-### 🔹 **Adding a Model & Fields**
-1. Open the **Dynamic Schema Form**.
-2. Enter the **Model Name** (e.g., `User`).
-3. Click **Add Field** to add attributes like `name: String`, `email: String @unique`, etc.
-4. Click **Create Model** to generate the Prisma schema.
-
-### 🔹 **Using the Terminal**
-- **Run Prisma Commands**: Execute `prisma migrate dev`, `db push`, etc.
-- **Clear Logs**: Use the **clear** button to reset logs.
-
-## 🛠️ Prisma Commands
-
-| Command | Description |
-|---------|------------|
-| `prisma db push` | Sync schema changes with the database |
-| `prisma migrate dev` | Create & apply migrations |
-| `prisma generate` | Regenerate Prisma Client |
-
-## 🚀 Roadmap
-
-- [ ] **Schema Versioning**
-- [ ] **Custom Prisma Decorators**
-- [ ] **Cloud Database Support**
-- [ ] **Dark Mode UI**
-- [ ] **Export & Import Schema Configs**
-
-## 🤝 Contributing
-
-Want to improve this project? Contributions are welcome!  
-
-1. **Fork** the repo  
-2. Create a **feature branch** (`git checkout -b feature-name`)  
-3. **Commit** your changes (`git commit -m "Added feature X"`)  
-4. **Push** to the branch (`git push origin feature-name`)  
-5. Open a **Pull Request** 🚀  
-
-## 🛡️ License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
-## 📬 Contact
-
-📧 **Email:** edvillan15@gmail.com 
-🐦 **Twitter:** [@yourhandle](https://twitter.com/meetlily)  
-🔗 **LinkedIn:** [Your Profile](https://linkedin.com/in/evillanueva0315)  
-
----
-
-⭐ **If you like this project, please consider giving it a star!** ⭐
-```
