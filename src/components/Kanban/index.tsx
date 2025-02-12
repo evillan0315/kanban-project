@@ -179,7 +179,7 @@ type Column = {
   slug: string;
 };
 
-export default function MultipleContainers({
+export default function Kanban({
   adjustScale = false,
  // itemCount,
   cancelDrop,
