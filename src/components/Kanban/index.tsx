@@ -181,7 +181,7 @@ type Column = {
 
 export default function Kanban({
   adjustScale = false,
- // itemCount,
+  // itemCount,
   cancelDrop,
   columns,
   handle = false,
@@ -198,8 +198,7 @@ export default function Kanban({
   vertical = false,
   scrollable = true,
 }: Props) {
-
-  const {columnColors} = useColor()
+  const { columnColors } = useColor();
 
   const loadItems = async (): Promise<Record<string, string[]>> => {
     try {
@@ -214,7 +213,7 @@ export default function Kanban({
       const tasks: Task[] = await tasksResponse.json();
       const columns: Column[] = await columnsResponse.json();
       // Store column colors using setColors from useColor
-      
+
       return columns.reduce<Record<string, string[]>>((acc, column) => {
         // Always include the column with an empty array as a default
 
@@ -584,6 +583,7 @@ export default function Kanban({
         ) : null}
       </DndContext>
       <DynamicFormDialog
+        model="column"
         handleAddColumn={handleAddColumn}
         open={open}
         onClose={handleDialogClose}
@@ -595,12 +595,10 @@ export default function Kanban({
     document.getElementById("some-element");
   }
   function renderSortableItemDragOverlay(id: UniqueIdentifier) {
-    
     return (
       <KanbanItem
         value={id}
         handle={handle}
-
         style={getItemStyles({
           containerId: findContainer(id) as UniqueIdentifier,
           overIndex: -1,
@@ -723,7 +721,7 @@ interface SortableItemProps {
   getIndex(id: UniqueIdentifier): number;
   renderItem(): React.ReactElement;
   wrapperStyle({ index }: { index: number }): React.CSSProperties;
-  onRemove: ()=>void;
+  onRemove: () => void;
 }
 
 function SortableItem({
@@ -753,9 +751,9 @@ function SortableItem({
   const mounted = useMountStatus();
   const mountedWhileDragging = isDragging && !mounted;
   const { columnColors } = useColor();
-  const handleRemoveItem = ()=>{
-    console.log("Handle remove Item")
-  }
+  const handleRemoveItem = () => {
+    console.log("Handle remove Item");
+  };
   return (
     <KanbanItem
       ref={disabled ? undefined : setNodeRef}

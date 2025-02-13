@@ -43,7 +43,8 @@ import {
   IconSettingsCog,
   IconTableColumn,
 } from "@tabler/icons-react";
-
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -255,9 +256,9 @@ export default function App({
                   overflow: "hidden",
                 }}
               >
-              
+               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Component {...pageProps} />
-                
+                </LocalizationProvider>
               </Paper>
             </Box>
           </AppLayout>

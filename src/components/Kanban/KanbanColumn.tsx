@@ -17,6 +17,7 @@ import DragIndicator from "@mui/icons-material/DragIndicator";
 import MoreVert from "@mui/icons-material/MoreVert";
 import { Edit, Settings } from "@mui/icons-material";
 import Add from "@mui/icons-material/Add";
+import DynamicFormDialog from "./KanbanColumnModal";
 
 export interface KanbanColumnsProps {
   children: React.ReactNode;
@@ -84,7 +85,7 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
       (EventTarget & HTMLButtonElement) | null
     >(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-
+    const [open, setOpen] = useState(false);
     //const Component = onClick ? 'button' : 'div';
     // Handlers
 
@@ -111,6 +112,9 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
     const handleCreateItem = (column: string) => {
       console.log(`Create ${column}`);
     };
+    const handleDialogClose = () => {
+
+    }
     return (
       <Box
         {...props}
@@ -143,7 +147,7 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
               <Button
                 variant="contained"
                 startIcon={<Add />}
-                onClick={() => handleCreateItem(label)}
+                onClick={() => setOpen(true)}
               >
                 Add Item
               </Button>
@@ -177,6 +181,7 @@ const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnsProps>(
             </MenuItem>
           </Menu>
         </Card>
+        <DynamicFormDialog open={open} onClose={handleDialogClose} handleAddColumn={handleCreateItem} model={"task"} />
       </Box>
     );
   }
